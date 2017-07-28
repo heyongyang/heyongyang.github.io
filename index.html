@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>尖尖角</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="尖尖角">
+<meta property="og:type" content="website">
+<meta property="og:title" content="尖尖角">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="尖尖角">
+<meta property="og:description" content="尖尖角">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="尖尖角">
+<meta name="twitter:description" content="尖尖角">
+  
+    <link rel="alternate" href="/atom.xml" title="尖尖角" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">尖尖角</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-springmvc注解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/28/springmvc注解/" class="article-date">
+  <time datetime="2017-07-28T13:12:10.644Z" itemprop="datePublished">2017-07-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/springmvc常用注解/">springmvc常用注解</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/28/springmvc注解/">springmvc常用注解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>基于注解的控制器优点：a.一个控制器类可以处理多个动作（一个实现了controller接口的控制器只能处理一个动作），减少应用程序中类的数量</p>
+<p>b.基于注解的控制器的请求映射不需要存储在配置文件中。</p>
+<p><strong>1 @Controller：</strong>在一个类上标注表明该类是一个控制器，可以接收和处理用户的请求。在springmvc中配置：</p>
+<pre><code>&lt;beans  xmlns:context=&quot;http://www.springframework.org/schema/context&quot;  &gt;  
+&lt;context:component-scan base-package=&quot;basepackage&quot;&gt;
+</code></pre><p><strong>2 @RequestMapping：</strong>注释一种类<br>或方法，处理请求地址映射，用于类上表示类中的所有请求方法都以此地址为父路径，注释在方法上使该方法成为一个请求处理方法，在接收到对应URL请求时调用。</p>
+<p> @RequestMapping(value = “/input”)等价于@RequestMapping(“/input”),(只含有一个属性时）。</p>
+<p>@RequestMapping(value=”input”,method=RequestMethod.POST),value属性和method属性。  </p>
+<p><strong>3 @Service：</strong>标注业务层组件，表明该类是一个服务，使该类能被作为依赖注入。</p>
+<p><strong>4 @Repository</strong>用于标注数据访问组件，即DAO组件。</p>
+<p><strong>5 @Autowired：</strong>通过注解到字段或方法实现依赖注入。导入包org.springframework.beans.factory.annotation.Autowired。</p>
+<pre><code>@Autowired
+private UserDao userDao; // 用于字段上
+
+@Autowired
+   public void setUserDao(UserDao userDao) { // 用于属性的方法上
+    this.userDao = userDao;
+    }
+</code></pre><p>@Autowired注解是按照类型（byType）装配依赖对象，默认情况下它要求依赖对象必须存在，如果允许null值，可以设置它的required属性为false。如果我们想使用按照名称（byName）来装配，可以结合@Qualifier注解一起使用。如下：</p>
+<pre><code>public class TestServiceImpl {
+        @Autowired
+         @Qualifier(&quot;userDao&quot;)
+        private UserDao userDao; 
+}
+</code></pre><p><strong>6 @Resource：</strong>和@Autowired类似，标注在字段或属性上。需导入包javax.annotation.Resource。  </p>
+<p>@Resource默认按照ByName自动注入，由J2EE提供，需要导入包javax.annotation.Resource。<br>@Resource有两个重要的属性：name和type，而Spring将@Resource注解的name属性解析为bean的名字，而type属性则解析为bean的类型。所以，如果使用name属性，则使用byName的自动注入策略，而使用type属性时则使用byType自动注入策略。如果既不制定name也不制定type属性，这时将通过反射机制使用byName自动注入策略。</p>
+<pre><code>// 下面两种@Resource只要使用一种即可
+@Resource(name=&quot;userDao&quot;)
+private UserDao userDao; // 用于字段上
+
+@Resource(name=&quot;userDao&quot;)
+public void setUserDao(UserDao userDao) { // 用于属性的setter方法上
+    this.userDao = userDao;
+}
+</code></pre><p>注：最好是将@Resource放在setter方法上，因为这样更符合面向对象的思想，通过set、get去操作属性，而不是直接去操作属性。</p>
+<pre><code>@Resource装配顺序：
+
+①如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常。
+
+②如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常。
+
+③如果指定了type，则从上下文中找到类似匹配的唯一bean进行装配，找不到或是找到多个，都会抛出异常。
+
+④如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配。
+
+    @Resource的作用相当于@Autowired，只不过@Autowired按照byType自动注入。
+</code></pre><p><strong>7 @ModelAttribute：</strong>springmvc在每次调用处理方法时，都会创建Model类型的一个实例，若使用该实例，则可在方法中添加一个Model类型的参数，还可在方法中添加ModelAttribute注释类型来访问Model实例。在org.springframework.web.bind.annotation包下。</p>
+<pre><code>    @RequestMapping(method = RequestMethod.POST)
+    public String submitOrder(@ModelAttribute(&quot;newOrder&quot;) Order order , Model model){ ...}
+//输入或创建的Order实例将用newOrder键值添加到Model对象中。
+</code></pre><p><strong>8 @SessionAttributes：</strong>将值放到session作用域中,@ModelAttribute 和 @SessionAttributes 都可传递和保存数据。</p>
+<p><strong>9 @PathVariable：</strong>将请求路径URL中的变量映射到功能处理方法的参数上，即去除URI中的变量作为参数。</p>
+<pre><code>@Controller  
+public class OrderController {  
+     @RequestMapping(value=&quot;/user/{userId}&quot;,method=RequestMethod.POST)  
+    public String getLogin(@PathVariable(&quot;userId&quot;)     String userId）{  
+     System.out.println(&quot;User Id : &quot; + userId);
+     return &quot;hello&quot;;  
+ }  //将请求路径中的userID变量映射为参数
+</code></pre><p><strong>10 @ResponseBody：</strong>该注解用于将Controller的方法返回的对象，通过适当的HttpMessageConverter转换为指定格式后，写入到Response对象的body数据区。</p>
+<p><strong>11 @RequestParam:</strong> 在springmvc后台控制层获取参数的方式主要有两种，一是request.getParameter(“name”),一是使用注解@RequestParam来获取。</p>
+<pre><code>@RequestMapping(&quot;/input_save&quot;)
+    public String save(@RequestParam String input_name , HttpServletRequest request）{
+    System.out.println（input_name）；
+    return &quot;name&quot;;
+    }
+在HTML中的代码是：
+    &lt;form action=&quot;/input_save&quot; method=&quot;post&quot;&gt;
+     参数inputName:&lt;input type=&quot;text&quot; name=&quot;inputStr&quot;&gt;
+    &lt;/form&gt;  
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/28/springmvc注解/" data-id="cj5nw1l2p0000ycc6yd5y9ipt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/28/hello-world/" class="article-date">
+  <time datetime="2017-07-28T03:33:20.209Z" itemprop="datePublished">2017-07-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/28/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/28/hello-world/" data-id="cj5nusubi0000tsc6knwl9n1s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/springmvc常用注解/">springmvc常用注解</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/28/springmvc注解/">springmvc常用注解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/28/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 he yongyang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
