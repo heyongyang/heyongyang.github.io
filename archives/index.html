@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -83,6 +83,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="尖尖角" type="application/atom+xml" />
+
 
 
 
@@ -93,15 +95,16 @@
 
 
 
-<meta name="description" content="尖尖角">
+<meta name="description" content="springmvc">
 <meta property="og:type" content="website">
 <meta property="og:title" content="尖尖角">
 <meta property="og:url" content="http://yoursite.com/archives/index.html">
 <meta property="og:site_name" content="尖尖角">
-<meta property="og:description" content="尖尖角">
+<meta property="og:description" content="springmvc">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="尖尖角">
-<meta name="twitter:description" content="尖尖角">
+<meta name="twitter:description" content="springmvc">
 
 
 
@@ -109,13 +112,13 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -135,7 +138,7 @@
 
 
 
-  <title>Archiv | 尖尖角</title>
+  <title>归档 | 尖尖角</title>
   
 
 
@@ -153,7 +156,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -197,31 +200,61 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/首页" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/分类" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/关于" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/归档" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
+          <a href="/标签" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
-            Tags
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/公益404" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
           </a>
         </li>
       
@@ -253,7 +286,7 @@
       
         
       
-      Öhm..! Ein Artikel. Bleib dran.
+      嗯..! 目前共计 1 篇日志。 继续努力。
     </span>
 
     
@@ -335,20 +368,20 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/source/uploads/avatar.JPG"
                alt="he yongyang" />
           <p class="site-author-name" itemprop="name">he yongyang</p>
            
-              <p class="site-description motion-element" itemprop="description">尖尖角</p>
+              <p class="site-description motion-element" itemprop="description">springmvc</p>
           
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/archives/">
+              <a href="/归档">
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
@@ -359,7 +392,7 @@
             <div class="site-state-item site-state-categories">
               
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Kategorien</span>
+                <span class="site-state-item-name">分类</span>
               
             </div>
           
@@ -368,6 +401,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">
@@ -411,13 +451,13 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
-  Theme -
+  主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+    NexT.Pisces
   </a>
 </div>
 
@@ -496,6 +536,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
 
   
   
