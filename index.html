@@ -400,7 +400,441 @@
       
         
           
-            <p>###分类以及时间和空间复杂度<br><img src="C:\Users\he\Desktop\HEXO\source\_posts\Java排序.png" alt=""></p>
+            <p>###分类以及时间和空间复杂度<br><img src="http://blog.chinaunix.net/attachment/201201/18/21457204_1326898064RUxx.jpg" alt=""></p>
+<p>###1 插入排序<br>最简单的排序算法之一，共有n-1趟排序组成，对于第p趟排序，插入排序保证从位置0到位置p为已排序状态。</p>
+<pre><code>import java.util.Arrays;
+
+public class InsertSort {
+    public static  void insertSort(int[] a){
+        int j;
+        for(int p = 1; p &lt; a.length ; p ++){
+            int temp = a[p];
+            for(j = p; j &gt; 0 ; j --){
+                if(temp &lt; a[j - 1]){
+                    a[j] = a[j - 1];
+                }else
+                    break;
+            }
+            a[j] = temp;
+            System.out.println(Arrays.toString(a));
+        }
+    }
+    public static void main(String[] args){
+        int[] a = { 5, 52,82,6, 2,35, 9, 4, 8, 7,12,46,3,78, 1,10,77 };
+        insertSort(a);
+        System.out.print(&quot;排序结果：&quot;);
+        for(int i = 0; i &lt; a.length;i ++){
+            System.out.print(a[i] + &quot; &quot;);
+        }
+    }
+}
+</code></pre><p>  结果：</p>
+<pre><code>[5, 52, 82, 6, 2, 35, 9, 4, 8, 7, 12, 46, 3, 78, 1, 10, 77]
+[5, 52, 82, 6, 2, 35, 9, 4, 8, 7, 12, 46, 3, 78, 1, 10, 77]
+[5, 6, 52, 82, 2, 35, 9, 4, 8, 7, 12, 46, 3, 78, 1, 10, 77]
+[2, 5, 6, 52, 82, 35, 9, 4, 8, 7, 12, 46, 3, 78, 1, 10, 77]
+[2, 5, 6, 35, 52, 82, 9, 4, 8, 7, 12, 46, 3, 78, 1, 10, 77]
+[2, 5, 6, 9, 35, 52, 82, 4, 8, 7, 12, 46, 3, 78, 1, 10, 77]
+[2, 4, 5, 6, 9, 35, 52, 82, 8, 7, 12, 46, 3, 78, 1, 10, 77]
+[2, 4, 5, 6, 8, 9, 35, 52, 82, 7, 12, 46, 3, 78, 1, 10, 77]
+[2, 4, 5, 6, 7, 8, 9, 35, 52, 82, 12, 46, 3, 78, 1, 10, 77]
+[2, 4, 5, 6, 7, 8, 9, 12, 35, 52, 82, 46, 3, 78, 1, 10, 77]
+[2, 4, 5, 6, 7, 8, 9, 12, 35, 46, 52, 82, 3, 78, 1, 10, 77]
+[2, 3, 4, 5, 6, 7, 8, 9, 12, 35, 46, 52, 82, 78, 1, 10, 77]
+[2, 3, 4, 5, 6, 7, 8, 9, 12, 35, 46, 52, 78, 82, 1, 10, 77]
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 35, 46, 52, 78, 82, 10, 77]
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 35, 46, 52, 78, 82, 77]
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 35, 46, 52, 77, 78, 82]
+排序结果：1 2 3 4 5 6 7 8 9 10 12 35 46 52 77 78 82  
+</code></pre><p>###2 Shell排序<br>先将要排序的一组数按某个增量d（n/2,n为要排序数的个数）分成若干组，每组中记录的下标相差d.对每组中全部元素进行直 接插入排序，然后再用一个较小的增量（d/2）对它进行分组，在每组中再进行直接插入排序。当增量减到1时，进行直接插入排序后，排序完成。</p>
+<pre><code> public class SellSort {
+    public static void sellSort(int[] a){
+        int j;
+        for(int gap = a.length / 2 ; gap &gt; 0; gap /= 2){
+            for(int i = gap ; i &lt; a.length ; i ++){
+                int temp = a[i];
+                for(j = i; j&gt;= gap;j -= gap){
+                    if(temp &lt; a[j - gap]){
+                        a[j] = a[j - gap];
+                    }
+                    else
+                        break;
+                }
+                a[j] = temp;
+                System.out.println(Arrays.toString(a));
+            }
+        }
+    }
+
+    public static void main(String[] args){
+        int[] a = { 5, 52,82,6, 2,35, 9, 4, 8, 7,12,46,3,78, 1,10,77 };
+        SellSort.sellSort(a);
+        for(int i = 0; i &lt; a.length;i ++){
+            System.out.print(a[i] + &quot; &quot;);
+        }
+    }
+}
+</code></pre><p>###3 直接选择排序<br>选择排序的第i趟是指通过n-i次关键字的比较，从n-i+1个记录中选出关键字最小的记录，并和第i个记录进行交换。先临时记录其位置，只有在一趟<br>循环完以后确定了最小的数据，才会发生交换。</p>
+<pre><code>import java.util.Arrays;
+
+public class ChooseSort {
+    public static void chooseSort(int[] a) {  
+        if (a == null || a.length &lt;= 0) {  
+        return;  
+        }  
+        for (int i = 0; i &lt; a.length; i++) {  
+        int min = i; /* 将当前下标定义为最小值下标 */  
+
+        for (int j = i + 1; j &lt; a.length; j++) {  
+               if (a[min] &gt; a[j]) { /* 如果有小于当前最小值的关键字 */  
+            min = j; /* 将此关键字的下标赋值给min */  
+            }  
+        }  
+        if (i != min) {/* 若min不等于i，说明找到最小值，交换 */  
+            int tmp = a[min];  
+            a[min] = a[i];  
+            a[i] = tmp;  
+            }  
+        }  
+    }  
+public static void main(String[] args){
+    int[] a = new int[] { 5, 52,82,6, 2,35, 9, 4, 8, 7,12,46,3,78, 1,10,77 }; 
+    chooseSort(a);
+    for(int i = 0; i &lt; a.length;i ++){
+        System.out.print(a[i] + &quot; &quot;);
+        }
+    }
+}
+</code></pre><p>###4 堆排序<br>堆排序是一种树形选择排序，是对直接选择排序的有效改进。<br>堆的定义如下：具有n个元素的序列（h1,h2,…,hn),当且仅当满足（hi&gt;=h2i,hi&amp; gt;=2i+1）或（hi&lt;=h2i,hi&lt;=2i+1） (i=1,2,…,n/2)时称之为堆。在这里只讨论满足前者条件的堆。由堆的定义可以看出，堆顶元素（即第一个元素）必为最大项（大顶堆）。完全二叉树 可以很直观地表示堆的结构。堆顶为根，其它为左子树、右子树。初始时把要排序的数的序列看作是一棵顺序存储的二叉树，调整它们的存储序，使之成为一个堆， 这时堆的根节点的数最大。然后将根节点与堆的最后一个节点交换。然后对前面(n-1)个数重新调整使之成为堆。依此类推，直到只有两个节点的堆，并对它们 作交换，最后得到有n个节点的有序序列。从算法描述来看，堆排序需要两个过程，一是建立堆，二是堆顶与堆的最后一个元素交换位置。所以堆排序有两个函数组 成。一是建堆的渗透函数，二是反复调用渗透函数实现排序的函数。<a href="http://blog.csdn.net/jiutianhe/article/details/42777045" target="_blank" rel="external">参考</a>  </p>
+<p>两种实现算法如下：<br>算法1： </p>
+<pre><code>public class HeapSort1 {
+        private static int leftChild(int i){
+            return 2 * i + 1;
+        }
+        private static void percDown(int[] a , int i , int n){
+            //数组a，i为当前位置，n为堆长度
+            int child;
+            int temp;
+            for(temp = a[i] ; leftChild(i) &lt; n ; i = child){
+                child = leftChild(i);
+                if(child != n - 1 &amp;&amp; a[child] &lt; a[child + 1])
+                    child ++;
+                if(temp &lt; a[child])
+                    a[i] = a[child];
+                else 
+                    break;
+            }
+            a[i] = temp;
+        }
+        public static void heapSort(int[] a){
+            for(int i = a.length / 2 - 1 ; i &gt;= 0; i --){
+                percDown(a , i , a.length);
+            }
+            for(int i = a.length - 1 ; i &gt; 0; i --){
+                swapReference(a , 0 , i);
+                percDown(a , 0 , i);
+            }
+        }
+        private static void swapReference(int[] a, int i, int n) {
+            if(i == n)
+                return ;
+            int temp = a[i];
+            a[i] = a[n];
+            a[n] = temp;
+        }
+        public static void main(String[] args){
+             int[] a = new int[] { 5, 3, 6, 2, 1, 9, 4, 8, 7 }; 
+             heapSort(a );
+             for(int i = 0; i &lt; a.length;i ++){
+                    System.out.print(a[i] + &quot; &quot;);
+                }
+        }
+}
+</code></pre><p>算法2  </p>
+<pre><code>    public class HeapSort2 {
+        private static void swap(int[] a , int i , int j){
+            if(i == j)
+                return ;
+            a[i] = a[i] + a[j];
+            a[j] = a[i] - a[j];
+            a[i] = a[i] - a[j];
+        }
+        private static void createMaxHeap(int[] a , int lastIndex){
+            for(int i = (lastIndex - 1) / 2 ; i &gt;= 0; i --){
+                //保留当前正在判断的节点    
+                int k = i;
+                //若当前节点的子节点存在
+                while(2 * k+ 1 &lt;= lastIndex){
+                        //biggerIndex总是记录较大节点的值，先赋值给当前节点的左子节点
+                        int biggerIndex = 2 * k + 1;
+                        if(biggerIndex &lt; lastIndex){
+                            // 若右子节点存在，否则此时biggerIndex应该等于 lastIndex  
+                            if(a[biggerIndex] &lt; a[biggerIndex + 1]){
+                                // 若右子节点值比左子节点值大，则biggerIndex记录的是右子节点的值  
+                                biggerIndex ++;
+                            }
+                        }
+                        if(a[biggerIndex] &gt; a[k]){
+                             // 若当前节点值比子节点最大值小，则交换2者得值，交换后将biggerIndex值赋值给k  
+                            swap(a , biggerIndex , k);
+                            k = biggerIndex;
+                        }
+                        else 
+                            break;
+                }
+            }
+        }
+        public static void print(int[] a){
+            for(int i = 0; i &lt; a.length ; i ++){
+                System.out.print(a[i] + &quot; &quot;);
+            }
+            System.out.println();
+        }
+    public static void heapSort(int[] data) {  
+    for (int i = 0; i &lt; data.length; i++) {  
+    createMaxHeap(data, data.length - 1 - i);  
+    swap(data, 0, data.length - 1 - i);  
+    print(data);  
+    }  
+    }  
+    public static void main(String[] args) {  
+    int[] data5 = new int[] { 5, 3, 6, 2, 1, 9, 4, 8, 7 };  
+    print(data5);  
+    heapSort(data5);  
+    System.out.println(&quot;排序后的数组：&quot;);  
+    print(data5); 
+    }  
+}
+</code></pre><p>###5 冒泡排序<br>在要排序的一组数中，对当前还未排好序的范围内的全部数，自上而下对相邻的两个数依次进行比较和调整，让较大的数往下沉，较小的往上冒。即：每当两相邻的数比较后发现它们的排序与排序要求相反时，就将它们互换。<a href="http://blog.csdn.net/jiutianhe/article/details/42777045" target="_blank" rel="external">参考</a>   </p>
+<pre><code>public class BubbleSort {
+    public static void main(String[] args){
+        int[] a = new int[] { 5, 52,82,6, 2,35, 9, 4, 8, 7,12,46,3,78, 1,10,77 }; 
+        for(int i = 0; i &lt; a.length - 1; i ++){
+            for(int j = 0; j &lt; a.length - i - 1; j ++){
+                if(a[j] &gt; a[j + 1]){
+                    int temp = a[j];
+                    a[j] = a[j + 1];
+                    a[j + 1] = temp;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(a));
+    }
+}
+</code></pre><p>###6 快速排序<br>选择一个基准元素,通常选择第一个元素或者最后一个元素（比较好的选择是将第一个，最后一个，和中间一个进行比较，以中间大小的元素为基准元素，算法1实现了这种）,通过一趟扫描，将待排序列分成两部分,一部分比基准元素小,一部分大于等于基准元素,此时基准元素在其排好序后的正确位置,然后再用同样的方法递归地排序划分的两部分。  </p>
+<p>算法1： 该算法中的CUTOFF为一个截止范围，即当排序数组个数小于该值时，使用插入排序（算法见上），这是因为当数组很小时(N&lt;=20),快速排序是递归的，其速度不如插入排序。</p>
+<pre><code>public class QuickSort1 {
+    private static final int  CUTOFF = 10;
+        private static int median3(int [] a , int left , int right){
+            int center = (right + left) / 2;
+            if(a[center] &lt; a[left])
+                swap(a , center , left);
+            if(a[right] &lt; a[left])
+                swap(a, right , left);
+            if(a[center] &gt; a[right])
+                swap(a , center , right);
+
+            swap(a , center , right - 1);
+            return a[right - 1];
+        }
+
+        private static void swap(int[] a, int i, int j) {
+            if(i == j)
+                return ;
+            a[i] = a[i] + a[j];
+            a[j] = a[i] - a[j];
+            a[i] = a[i] - a[j];
+        }
+        private static void quickSort(int[] a , int left , int right){
+            if(left + CUTOFF &lt;= right){
+                int pivot = median3(a , left , right);
+                int i = left;
+                int j = right - 1;
+                for( ; ; ){
+                    while(a[ ++ i] &lt; pivot){}
+                    while(a[ -- j] &gt; pivot){}
+                    if(i &lt; j)
+                        swap(a , i , j);
+                    else
+                        break;
+                }
+                swap(a , i , right - 1);
+
+                quickSort(a , left , i - 1);
+                quickSort(a , i , right);
+            }
+            else
+                InsertSort.insertSort(a);
+
+        }
+        public static void quickSort(int[] a){
+            quickSort(a , 0 , a.length - 1);
+        }
+
+        public static void main(String[] args) {  
+    int[] a = new int[] { 5, 52,82,6, 2,35, 9, 4, 8, 7,12,46,3,78, 1,10,77 };  
+
+    quickSort(a , 0 , a.length - 1);
+    for(int i = 0; i &lt; a.length ; i ++){
+        System.out.print(a[i]  + &quot; &quot;);
+    }
+     }
+}  
+</code></pre><p>快速排序算法2：该算法完全使用快速排序的规则。  </p>
+<pre><code>public class QuickSort2 {
+        private static int getMiddle(int[] a , int left , int right){
+            int temp = a[left];//以数组的第一个为中轴;
+            while(left &lt; right){
+                while(left &lt; right &amp;&amp; a[right] &gt; temp)
+                    right --;
+                a[left] = a[right];//比中轴小的记录移到低端
+                while(left &lt; right &amp;&amp; a[left] &lt; temp)
+                    left ++;
+                a[right] = a[left];//比中轴大的记录移到高端
+
+            }
+            a[left] = temp;
+            return left;//返回中值
+        }
+        private static void quickSort(int[] a , int left , int right){
+            if(left &lt; right){
+                int middle = getMiddle(a , left , right);
+                quickSort(a , left , middle - 1);
+                quickSort(a , middle + 1 , right);
+            }
+        }
+        public static void quickSort(int[] a){
+            if(a.length &gt; 0)
+                quickSort(a , 0 , a.length - 1);
+        }
+        public static void main(String[] args){
+            int[] a = new int[] { 5, 52,82,6, 2,35, 9, 4, 8, 7,12,46,3,78, 1,10,77 }; 
+            for(int i = 0; i &lt; a.length ; i ++){
+        System.out.print(a[i]  + &quot; &quot;);
+    }
+            System.out.println();
+            quickSort(a);
+    for(int i = 0; i &lt; a.length ; i ++){
+        System.out.print(a[i]  + &quot; &quot;);
+    }
+        }
+}
+</code></pre><p>###7 归并排序<br>归并（Merge）排序法是将两个（或两个以上）有序表合并成一个新的有序表，即把待排序序列分为若干个子序列，每个子序列是有序的。然后再把有序子序列合并为整体有序序列。该算法中基本的操作是合并两个已排序的表。因为这两个表示已排序的，所以若将输出放到第三个表中，则该算法可以通过对输入数据一趟排序完成。</p>
+<pre><code>public class MergeSort {
+        private static void mergeSort(int[] a , int[] tempArray , int left , int right){
+            if(left &lt; right){
+                int center = (left + right) / 2;
+                mergeSort(a , tempArray , left , center);
+                mergeSort(a , tempArray , center + 1 , right);
+                merge(a , tempArray , left , center + 1 , right);
+            }
+        }
+
+        private static void merge(int[] a, int[] tempArray, 
+                int leftPos, int rightPos, int rightEnd) {
+            int leftEnd =  rightPos - 1;
+            int tempPos = leftPos;
+            int numElements = rightEnd - leftPos + 1;
+            while(leftPos &lt;= leftEnd &amp;&amp; rightPos &lt;= rightEnd){
+                if(a[leftPos] &lt;= a[rightPos])
+                    tempArray[tempPos ++] = a[leftPos ++];
+                else
+                    tempArray[tempPos ++] = a[rightPos ++];
+            }
+            while(leftPos &lt;= leftEnd)
+                tempArray[tempPos ++] = a[leftPos ++];
+            while(rightPos &lt;= rightEnd)
+                tempArray[tempPos ++] = a[rightPos ++];
+
+            for(int i = 0 ; i &lt; numElements ; i ++ , rightEnd --)
+                a[rightEnd] = tempArray[rightEnd];
+
+        }
+         public static void main(String[] args) {  
+        int[] a = new int[] { 5, 3, 6, 2, 1, 9, 4, 8, 7,12,52,46,78,35,10 };  
+        int[] tempArray = new int[a.length];
+        mergeSort(a , tempArray , 0 , a.length - 1);
+        for(int i = 0; i &lt; a.length ; i ++){
+            System.out.print(a[i]  + &quot; &quot;);
+        }
+         }
+}
+</code></pre><p>###8 基数排序<br>将所有待比较数值（正整数）统一为同样的数位长度，数位较短的数前面补零。然后，从最低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成以后,数列就变成一个有序序列。</p>
+<p>基数算法的一个简单实现：    </p>
+<pre><code>public class SelectSort {
+    public static void main(String[] args){
+        int a[] = {1,2,3,4,4,4,3,1,2,3 };  
+        int c[] = new int[5];
+        for(int i = 0; i &lt; c.length; i ++){
+            for(int j = 0; j &lt; a.length; j ++){
+                if(a[j] == i){
+                    c[i] ++;
+                }
+            }
+        }
+        int index = 0;
+        for(int i = 0; i &lt; c.length; i ++){
+            for(int j = index; j &lt; index + c[i]; j ++){
+                a[j] = i;
+            }
+            index += c[i];
+        }
+        System.out.println(Arrays.toString(a));
+        System.out.println(Arrays.toString(c));
+    }
+}
+</code></pre><p>对相同长度的字符数组进行排序是，使用桶排序和基数排序结合，一个从每个数组的最后一个元素放入到桶中对应元素，并排列，一次往前，直到第一个元素的位置。算法实现如下（只针对相同长度的数组）：<br>import java.util.Arrays;</p>
+<pre><code>/**
+ * 定长字符串的排序，桶排序+计数基数排序
+ * @author he
+ *
+ */
+public class CountingRadixSort {
+        public static String[] countingRadixSort(String[] str , int strLen){
+            final int BUCKETS = 256;
+            int len = str.length;
+            String[] buffer = new String[len];
+            String[] in = str;
+            String[] out = buffer;
+            for(int pos = strLen - 1 ; pos &gt;= 0 ; pos --){
+                int[] count = new int[BUCKETS + 1];
+                for(int i = 0 ; i &lt; len ; i ++)
+                    count[in[i].charAt(pos) + 1] ++;
+
+                for(int b = 1 ; b &lt;= BUCKETS ; b ++)
+                    count[b] += count[b - 1];
+
+                for(int i = 0 ; i &lt; len ; i ++)
+                    out[count[in[i].charAt(pos)] ++ ] = in[i];
+
+                String[] temp = in;
+                in = out;
+                out = temp;
+                System.out.println(Arrays.toString(in));
+            }
+            //if(strLen % 2 == 1){
+                //for(int i = 0; i &lt; str.length ; i ++){
+                //    out[i] = in[i];
+            //    }
+                return in;
+
+
+        }
+        public static void main(String[] args){
+            String[] str = {&quot;heyong&quot; , &quot;dijian&quot; , &quot;chenli&quot; , &quot;liuzhi&quot;,&quot;yuquan&quot;,&quot;ruhong&quot;,&quot;dingji&quot;};
+            String[] s = countingRadixSort(str , 6);
+            System.out.println(Arrays.toString(s));
+        }
+}
+</code></pre><p>该Java程序的每次循环结果如下：  </p>
+<pre><code>[heyong, ruhong, chenli, liuzhi, dingji, dijian, yuquan]
+[dijian, yuquan, liuzhi, dingji, chenli, heyong, ruhong]
+[dingji, dijian, chenli, heyong, ruhong, yuquan, liuzhi]
+[chenli, ruhong, dijian, dingji, yuquan, liuzhi, heyong]
+[heyong, chenli, dijian, dingji, liuzhi, ruhong, yuquan]
+[chenli, dijian, dingji, heyong, liuzhi, ruhong, yuquan]
+[chenli, dijian, dingji, heyong, liuzhi, ruhong, yuquan]
+</code></pre><p>基本的8大排序算法以及Java实现已经基本完成了，当然还有很多其他形式的实现，还有针对不同长度的字符数组的排序，以及外部排序等，还需要在以后的学习中进行补充。</p>
 
           
         
