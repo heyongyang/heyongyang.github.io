@@ -318,7 +318,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/01/http协议/" itemprop="url">http协议</a></h1>
+                <a class="post-title-link" href="/2017/08/01/http协议/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -341,28 +341,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/springmvc/" itemprop="url" rel="index">
-                    <span itemprop="name">springmvc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -370,7 +348,7 @@
 
           
           
-             <span id="/2017/08/01/http协议/" class="leancloud_visitors" data-flag-title="http协议">
+             <span id="/2017/08/01/http协议/" class="leancloud_visitors" data-flag-title="">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -400,7 +378,9 @@
       
         
           
-            <h3 id="1-http协议概念"><a href="#1-http协议概念" class="headerlink" title="1 http协议概念"></a>1 http协议概念</h3><p>HTTP(Hyper Text Transfer Protocol,超文本传输协议)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。是承载于TCP之上的应用层协议，由请求和相应组成，是一个标准的客户端服务器模型。<a href="http://blog.csdn.net/lijizh1013/article/details/8081284" target="_blank" rel="external">参考1</a> <a href="http://blog.csdn.net/u012315155/article/details/50950433" target="_blank" rel="external">参考2</a><br>版本有http/1.0 , http/1.1。<br>区别：http/1.0的会话方式中，每次连接只处理一次请求和响应，且只能获得一个web资源，对每一个页面的访问，浏览器与文本服务器都要建立一次单独的连接。而http/1.1在一个TCP连接上可以传送多个http请求和响应，在一次连接上获取多个web资源，多个请求和响应过程可以重叠进行，增加了更多的请求头和响应头。  </p>
+            <hr>
+<p>title: http协议<br>date: 2017-07-07 08:55:29   //在此处输入你编辑这篇文章的时间。<br>categories: springmvc </p>
+<h2 id="toc-true-在此处设定是否开启目录，需要主题支持。"><a href="#toc-true-在此处设定是否开启目录，需要主题支持。" class="headerlink" title="toc: true  //在此处设定是否开启目录，需要主题支持。"></a>toc: true  //在此处设定是否开启目录，需要主题支持。</h2><h3 id="1-http协议概念"><a href="#1-http协议概念" class="headerlink" title="1 http协议概念"></a>1 http协议概念</h3><p>HTTP(Hyper Text Transfer Protocol,超文本传输协议)是一种通信协议，它允许将超文本标记语言(HTML)文档从Web服务器传送到客户端的浏览器。是承载于TCP之上的应用层协议，由请求和相应组成，是一个标准的客户端服务器模型。<a href="http://blog.csdn.net/lijizh1013/article/details/8081284" target="_blank" rel="external">参考1</a> <a href="http://blog.csdn.net/u012315155/article/details/50950433" target="_blank" rel="external">参考2</a><br>版本有http/1.0 , http/1.1。<br>区别：http/1.0的会话方式中，每次连接只处理一次请求和响应，且只能获得一个web资源，对每一个页面的访问，浏览器与文本服务器都要建立一次单独的连接。而http/1.1在一个TCP连接上可以传送多个http请求和响应，在一次连接上获取多个web资源，多个请求和响应过程可以重叠进行，增加了更多的请求头和响应头。  </p>
 <h3 id="2-http请求消息"><a href="#2-http请求消息" class="headerlink" title="2 http请求消息"></a>2 http请求消息</h3><p>在客户端连上服务器后，向服务器请求某个web资源，称为客户端向服务器端发送了一个http请求。<br>一个完整的http请求由一个请求行、若干消息头、请求数据组成（消息头和请求数据间有一空行）。   </p>
 <pre><code>GET /he/hello HTTP/1.1 //请求行   
 
